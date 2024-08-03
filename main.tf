@@ -21,12 +21,6 @@ resource "aws_db_parameter_group" "friendcipes-parameter-group" {
 resource "aws_security_group" "db_security_group" {
   name        = "db_security_group"
   description = "Allows Ingress traffic to DB"
-  ingress {
-    from_port = 5432
-    protocol  = "tlc"
-    to_port   = 5432
-    security_groups = [aws_security_group.app_security_group]
-  }
 
   tags = {
     Name = "db_security_group"
@@ -36,14 +30,26 @@ resource "aws_security_group" "db_security_group" {
 resource "aws_security_group" "app_security_group" {
   name        = "app_security_group"
   description = "Allows Egress traffic to DB"
-  egress {
-    from_port = 5432
-    protocol  = "tlc"
-    to_port   = 5432
-    security_groups = [aws_security_group.db_security_group]
-  }
 
   tags = {
     Name = "app_security_group"
   }
+}
+
+resource "aws_security_group_rule" "ingress_on_db" {
+  type              = "ingress"
+  from_port         = 5432
+  to_port           = 5432
+  protocol          = "tcp"
+  security_group_id = aws_security_group.db_security_group
+  source_security_group_id = aws_security_group.app_security_group
+}
+
+resource "aws_security_group_rule" "egress_from_app" {
+  type              = "egress"
+  from_port         = 5432
+  to_port           = 5432
+  protocol          = "tcp"
+  security_group_id = aws_security_group.app_security_group
+  source_security_group_id = aws_security_group.db_security_group
 }
