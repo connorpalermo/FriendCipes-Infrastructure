@@ -10,6 +10,7 @@ resource "aws_db_instance" "friendcipesdb" {
   parameter_group_name = aws_db_parameter_group.friendcipes-parameter-group.name
   skip_final_snapshot  = true
   publicly_accessible = false
+  vpc_security_group_ids = [aws_security_group.db_security_group.id]
 }
 
 resource "aws_db_parameter_group" "friendcipes-parameter-group" {
@@ -24,6 +25,7 @@ resource "aws_security_group" "db_security_group" {
     from_port = 5432
     protocol  = "tlc"
     to_port   = 5432
+    security_groups = [aws_security_group.app_security_group]
   }
 
   tags = {
@@ -38,6 +40,7 @@ resource "aws_security_group" "app_security_group" {
     from_port = 5432
     protocol  = "tlc"
     to_port   = 5432
+    security_groups = [aws_security_group.db_security_group]
   }
 
   tags = {
