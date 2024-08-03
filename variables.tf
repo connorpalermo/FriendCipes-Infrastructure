@@ -1,17 +1,21 @@
-variable "ami" {
-  type        = string
-  description = "Ubuntu AMI ID in N. Virginia Region"
-  default     = "ami-0ba9883b710b05ac6"
+variable "db_user" {
+  type = string
+}
+variable "db_pw" {
+  type = string
 }
 
-variable "instance_type" {
-  type        = string
-  description = "Instance type"
-  default     = "t2.micro"
+variable "db_engine" {
+  type = string
+  description = "Database Engine for RDS Instance"
+  default = "postgres"
 }
 
-variable "name_tag" {
-  type        = string
-  description = "Name of the EC2 instance"
-  default     = "My EC2 Instance"
+variable "db_engine_version" {
+  type = string
+  description = "Engine Version for RDS Instance"
+  default = "postgres"
 }
+
+
+
