@@ -42,7 +42,7 @@ resource "aws_security_group_rule" "ingress_on_db" {
   to_port           = 5432
   protocol          = "tcp"
   security_group_id = aws_security_group.db_security_group
-  source_security_group_id = aws_security_group.app_security_group
+  source_security_group_id = aws_security_group.app_security_group.id
 }
 
 resource "aws_security_group_rule" "egress_from_app" {
@@ -51,5 +51,5 @@ resource "aws_security_group_rule" "egress_from_app" {
   to_port           = 5432
   protocol          = "tcp"
   security_group_id = aws_security_group.app_security_group
-  source_security_group_id = aws_security_group.db_security_group
+  source_security_group_id = aws_security_group.db_security_group.id
 }
