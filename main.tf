@@ -15,14 +15,4 @@ resource "aws_db_instance" "friendcipesdb" {
 resource "aws_db_parameter_group" "friendcipes-parameter-group" {
   name   = "friendcipes-parameter-group"
   family = "postgres14"
-
-  parameter {
-    name  = "character_set_server"
-    value = "utf8"
-  }
-
-  parameter {
-    name  = "character_set_client"
-    value = "utf8"
-  }
 }
