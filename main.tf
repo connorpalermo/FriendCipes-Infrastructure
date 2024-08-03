@@ -25,7 +25,6 @@ resource "aws_security_group" "db_security_group" {
     from_port = 5432
     protocol  = "tlc"
     to_port   = 5432
-    security_groups = [aws_security_group.app_security_group]
   }
 
   tags = {
@@ -40,7 +39,6 @@ resource "aws_security_group" "app_security_group" {
     from_port = 5432
     protocol  = "tlc"
     to_port   = 5432
-    security_groups = [aws_security_group.db_security_group]
   }
 
   tags = {
