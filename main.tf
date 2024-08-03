@@ -1,12 +1,13 @@
 resource "aws_db_instance" "friendcipesdb" {
+  identifier = "friendcipesdb"
   allocated_storage    = 10
   max_allocated_storage = 50
   db_name              = "friendcipesdb"
   engine               = var.db_engine
   engine_version       = var.db_engine_version
   instance_class       = "db.t3.micro"
-  username             = var.db_user
-  password             = var.db_pw
+  username             = var.db_user // jenkins var
+  password             = var.db_pw // jenkins var
   parameter_group_name = aws_db_parameter_group.friendcipes-parameter-group.name
   skip_final_snapshot  = true
   publicly_accessible = false
