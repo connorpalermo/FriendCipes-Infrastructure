@@ -10,7 +10,6 @@ resource "aws_db_instance" "friendcipesdb" {
   parameter_group_name = aws_db_parameter_group.friendcipes-parameter-group.name
   skip_final_snapshot  = true
   publicly_accessible = false
-  security_group_names = [aws_security_group.db_security_group]
 }
 
 resource "aws_db_parameter_group" "friendcipes-parameter-group" {
