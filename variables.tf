@@ -14,7 +14,7 @@ variable "db_engine" {
 variable "db_engine_version" {
   type = string
   description = "Engine Version for RDS Instance"
-  default = "postgres"
+  default = "14"
 }
 
 
