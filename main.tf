@@ -9,6 +9,7 @@ resource "aws_db_instance" "friendcipesdb" {
   password             = var.db_pw
   parameter_group_name = aws_db_parameter_group.friendcipes-parameter-group.name
   skip_final_snapshot  = true
+  publicly_accessible = false
 }
 
 resource "aws_db_parameter_group" "friendcipes-parameter-group" {

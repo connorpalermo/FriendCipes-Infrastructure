@@ -1,10 +1,5 @@
 
-output "public_ip" {
-  value       = aws_instance.my_vm.public_ip
-  description = "Public IP Address of EC2 instance"
-}
-
-output "instance_id" {
-  value       = aws_instance.my_vm.id
-  description = "Instance ID"
+output "address" {
+  value       = aws_db_instance.friendcipesdb.address
+  description = "Address of RDS instance"
 }
