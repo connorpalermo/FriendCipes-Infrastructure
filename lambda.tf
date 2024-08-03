@@ -4,17 +4,10 @@ provider "aws" {
 
 resource "aws_lambda_function" "friendcipes-core-lambda" {
   function_name = "friendcipes-core-lambda"
-
-  # The bucket name as created earlier with "aws s3api create-bucket"
   s3_bucket = "friendcipes-lambda-source"
   s3_key    = "friendcipes-core-lambda-1.0-SNAPSHOT.jar"
-
-  # "main" is the filename within the zip file (main.js) and "handler"
-  # is the name of the property under which the handler function was
-  # exported in that file.
   handler = "com.friendcipes.FriendCipesCoreHandler::handleRequest"
   runtime = "java8"
-
   role = "${aws_iam_role.lambda_exec.arn}"
 }
 
