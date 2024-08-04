@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_lambda_function" "friendcipes-core-lambda" {
   function_name = "friendcipes-core-lambda"
   s3_bucket = "friendcipes-lambda-source"
-  s3_key    = "friendcipes-core-lambda-1.0-SNAPSHOT.jar"
+  s3_key    = "/${var.lambda_version}/friendcipes-core-lambda-1.0-SNAPSHOT.jar"
   handler = "com.friendcipes.FriendCipesCoreHandler::handleRequest"
   runtime = "java11"
   role = "${aws_iam_role.lambda_exec.arn}"

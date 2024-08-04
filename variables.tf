@@ -17,5 +17,11 @@ variable "db_engine_version" {
   default = "14"
 }
 
+variable "lambda_version" {
+  type = string
+  description = "Lambda Version"
+  default = "1.0.0"
+}
+
 
 
