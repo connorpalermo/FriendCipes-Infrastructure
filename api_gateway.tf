@@ -50,7 +50,7 @@ resource "aws_api_gateway_deployment" "friendcipes-core-api" {
   ]
 
   rest_api_id = aws_api_gateway_rest_api.friendcipes-core-api.id
-  stage_name  = "test"
+  stage_name  = "v1"
 }
 
 resource "aws_lambda_permission" "apigw" {
