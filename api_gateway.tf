@@ -3,18 +3,17 @@ resource "aws_api_gateway_rest_api" "friendcipes-core-api" {
   description = "Core API Endpoints for FriendCipes"
 }
 
-resource "aws_api_gateway_resource" "friendcipes-proxy" {
+resource "aws_api_gateway_resource" "proxy" {
   rest_api_id = aws_api_gateway_rest_api.friendcipes-core-api.id
-  parent_id   = aws_api_gateway_rest_api.friendcipes-core-api.id
+  parent_id   = aws_api_gateway_rest_api.friendcipes-core-api.root_resource_id
   path_part   = "{proxy+}"
 }
 
 resource "aws_api_gateway_method" "proxy" {
   rest_api_id   = aws_api_gateway_rest_api.friendcipes-core-api.id
-  resource_id   = aws_api_gateway_resource.friendcipes-proxy.id
+  resource_id   = aws_api_gateway_resource.proxy.id
   http_method   = "ANY"
   authorization = "NONE"
-  depends_on = [aws_api_gateway_resource.friendcipes-proxy]
 }
 
 resource "aws_api_gateway_integration" "lambda" {
