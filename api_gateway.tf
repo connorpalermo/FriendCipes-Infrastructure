@@ -52,3 +52,14 @@ resource "aws_api_gateway_deployment" "friendcipes-core-api" {
   rest_api_id = aws_api_gateway_rest_api.friendcipes-core-api.id
   stage_name  = "test"
 }
+
+resource "aws_lambda_permission" "apigw" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.friendcipes-core-lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  # The /*/* portion grants access from any method on any resource
+  # within the API Gateway "REST API".
+  source_arn = "${aws_api_gateway_rest_api.friendcipes-core-api.execution_arn}/*/*"
+}
