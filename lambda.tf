@@ -8,7 +8,7 @@ resource "aws_lambda_function" "friendcipes-core-lambda" {
   s3_key    = "/${var.lambda_version}/friendcipes-core-lambda-1.0-SNAPSHOT.jar"
   handler = "com.friendcipes.FriendCipesCoreHandler::handleRequest"
   runtime = "java11"
-  role = "${aws_iam_role.lambda_exec.arn}"
+  role = aws_iam_role.lambda_exec.arn
 }
 
 resource "aws_iam_role" "lambda_exec" {
@@ -31,7 +31,12 @@ resource "aws_iam_role" "lambda_exec" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "attachment" {
+resource "aws_iam_role_policy_attachment" "attachment_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.lambda_exec.name
+}
+
+resource "aws_iam_role_policy_attachment" "attachment_secrets_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
   role       = aws_iam_role.lambda_exec.name
 }
